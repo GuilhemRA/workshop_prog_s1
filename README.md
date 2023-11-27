@@ -812,7 +812,7 @@ void mosaique_miroir_simple()
 }
 ```
 ![image](/output/mosaique_miroir_simple.png)
-### Fractale de Mandelbrot
+### Ensemble de Mandelbrot
 
 ```cpp
 void mandelbrot (int pre)
@@ -837,9 +837,11 @@ void mandelbrot (int pre)
             image.pixel(x, y) = glm::vec3{grayscale};
             }
         }
-image.save("output/pouet.png");
+image.save("output/mandelbrot.png");
 }
 ```
+**Sympa :** On peut changer les conditions initiales de z=0 pour obtenir d'autres ensembles de Julia non particuliers
+
 ### Tentative Diamond Square
 
 ```cpp
@@ -957,8 +959,10 @@ void diamond_square(int size)
         
     }
 
-image.save("output/pouet.png");
+image.save("output/ds.png");
 }
 ```
+
+**Difficulté :** boucler sur les diamants en maitrisant le parcours des secteurs et réaliser les conditions aux bords. Inachevé.
 
 *© 2023 AMGR, Inc. Tous droits réservés*
