@@ -1,7 +1,7 @@
-###**Workshop Algorithmique**
+### **Workshop Algorithmique**
 *Aurélien Michaud & Guilhem Rebéjac*
 
-####Exercice 1 : Ne garder que le vert
+#### Exercice 1 : Ne garder que le vert
 ```cpp
 void vert()
 {
@@ -23,7 +23,7 @@ void vert()
 
 ![image](/output/vert.png)
 
-####Exercice 2 : Echanger les canaux
+#### Exercice 2 : Echanger les canaux
 ```cpp
 void canaux()
 {
@@ -40,7 +40,7 @@ void canaux()
 ```
 ![image](/output/canaux.png)
 
-####Exercice 3 : Noir & Blanc
+#### Exercice 3 : Noir & Blanc
 *Version moyenne des couleurs :*
 ```cpp
 void noirblanc_moyenne()
@@ -118,7 +118,7 @@ void noirblanc_couleurdominante()
 ```
 ![image](/output/noirblanc_couleurdominante.png)
 
-####Exercice 4 : Négatif
+#### Exercice 4 : Négatif
 ```cpp
 void negatif()
 {
@@ -135,7 +135,7 @@ void negatif()
 ```
 ![image](/output/negatif.png)
 
-####Exercice 5 : Dégradé
+#### Exercice 5 : Dégradé
 ```cpp
 void degrade()
 {
@@ -155,7 +155,7 @@ void degrade()
 ```
 ![image](/output/degrade.png)
 
-####Exercice 6 : Miroir
+#### Exercice 6 : Miroir
 ```cpp
 void miroir()
 {
@@ -175,7 +175,7 @@ void miroir()
 ![image](/output/miroir.png)
 **Difficulté :** déterminer le "-1-x" qui permet de trouver le bon pixel à échanger.
 
-####Exercice 7 : Image bruitée
+#### Exercice 7 : Image bruitée
 ```cpp
 void image_bruitee()
 {
@@ -199,7 +199,7 @@ void image_bruitee()
 ```
 ![image](/output/image_bruitee.png)
 
-####Exercice 8 : Rotation de 90°
+#### Exercice 8 : Rotation de 90°
 ```cpp
 void rotation_90()
 {
@@ -218,7 +218,7 @@ void rotation_90()
 ```
 ![image](/output/rotation_90.png)
 
-####Exercice 9 : RGB split
+#### Exercice 9 : RGB split
 ```cpp
 void rgb_split()
 {
@@ -265,7 +265,7 @@ void rgb_split()
 ![image](/output/rgb_split.png)
 **Difficulté :** réussir à bien coder pour que les conditions aux bords ne bug pas.
 
-####Exercice 10 : Luminosité
+#### Exercice 10 : Luminosité
 ```cpp
 void luminosite()
 {
@@ -287,7 +287,7 @@ void luminosite()
 ![image](/output/luminosite.png)
 **Difficulté :** comprendre l'utilité des fonctions polynômes dans la gestion de la luminosité.
 
-####Exercice 11 : Disque
+#### Exercice 11 : Disque
 ```cpp
 void disque()
 {
@@ -319,7 +319,7 @@ void disque()
 ![image](/output/disque.png)
 **Difficulté :** trouver la fonction permettant de déterminer si le pixel appartient ou non au cercle.
 
-####Exercice 12 : Cercle
+#### Exercice 12 : Cercle
 ```cpp
 void cercle()
 {
@@ -354,7 +354,7 @@ void cercle()
 ```
 ![image](/output/cercle.png)
 
-####Exercice 13 : Rosace
+#### Exercice 13 : Rosace
 ```cpp
 #define M_PI 3.14
 
@@ -680,7 +680,7 @@ glm::vec3 rgb_from_hsl(float h, float s, float l)
 
 ![image](/output/rosace_modif2.png)
 
-####Exercice 14 : Mosaïque
+#### Exercice 14 : Mosaïque
 ```cpp
 void mosaique()
 {
@@ -707,7 +707,7 @@ void mosaique()
 ![image](/output/mosaique.png)
 **Difficulté :** comprendre l'utilité du modulo dans la simplification du code *(voir mosaïque miroir - version d'incrémentation par ligne/colonne)*.
 
-####Exercice 15 : Mosaïque miroir
+#### Exercice 15 : Mosaïque miroir
 *Version d'incrémentation par ligne/colonne :*
 ```cpp
 void mosaique_miroir_complique()
