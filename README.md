@@ -812,8 +812,31 @@ void mosaique_miroir_simple()
 }
 ```
 ![image](/output/mosaique_miroir_simple.png)
+### Fractale de Mandelbrot
 
 ```cpp
-
-```
+void mandelbrot (int pre)
+{
+    sil::Image image{2000, 2000};
+        for (int x{0}; x < image.width(); x++)
+        {
+            for (int y{0}; y < image.height(); y++)
+            {
+                std::complex<float> z{0.5, 0.4};
+                std::complex<float> c{(x-1500)/1000.f, (y-1000)/1000.f};
+                int i;
+                for (i=0; i < pre; i++)
+                {
+                    z = z * z + c;
+                
+                if (std::abs(z) >= 2) {
+                    break;
+                }
+                }
+            float grayscale = pow(static_cast<float>(i) / static_cast<float>(pre), 1.f/3);
+            image.pixel(x, y) = glm::vec3{grayscale};
+            }
+        }
+image.save("output/pouet.png");
+}
 *© 2023 AMGR, Inc. Tous droits réservés*
