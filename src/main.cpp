@@ -763,6 +763,124 @@ void mosaique_miroir_simple()
 
 }
 
+void diamond_square(int size)
+{
+    sil::Image image{static_cast<int>(size), static_cast<int>(size)};
+
+    float w{1};
+    float x{0.2};
+    float y{0.5};
+    float z{1};
+    image.pixel(0,0)=glm::vec3{w};
+    image.pixel(size-1,0)=glm::vec3{x};
+    image.pixel(0,size-1)=glm::vec3{y};
+    image.pixel(size-1,size-1)=glm::vec3{z};
+    
+    float m{(w+y+(w+x+y+z)/4)/3};
+    float n{(w+x+(w+x+y+z)/4)/3};
+    float p{(x+z+(w+x+y+z)/4)/3};
+    float q{(y+z+(w+x+y+z)/4)/3};
+    image.pixel(0,(size-1)/2)=glm::vec3{m};
+    image.pixel((size-1)/2,0)=glm::vec3{n};
+    image.pixel(size-1,(size-1)/2)=glm::vec3{p};
+    image.pixel((size-1)/2,size-1)=glm::vec3{q};
+
+    
+    //for (int it = 1; it <= static_cast<int>(std::pow(2, size)); it++)
+    {
+        for (int size2 = size-1; size2>=1; size2/= 2)
+        {   
+            
+            int k{0};
+            
+            
+            //Square      
+            for (int i{0}; i < (size-1)/(size2); i++) //it//
+            {
+                for (int j{0}; j < (size-1)/(size2); j++) //it
+                {
+                    
+                    w=image.pixel((i)*size2,(j)*size2).r;
+                    x=image.pixel((i+1)*size2,(j)*size2).r;
+                    y=image.pixel((i)*size2,(j+1)*size2).r;
+                    z=image.pixel((i+1)*size2,(j+1)*size2).r;
+
+                    image.pixel((i+0.5)*size2,(j+0.5)*size2)=glm::vec3{(w+x+y+z)/4};
+                    
+                    
+                }
+
+            }
+            //Diamond
+            k=0;
+            for (int i{0}; i < (size-1)/(size2); i++) //it
+            {
+                for (int j{k}; j < (size-1)/(size2); j+=2) //it
+                {
+                    
+                    if (i==0)
+                    {
+                        // n=image.pixel((i)*size2,(j-0.5)*size2).r;
+                        q=image.pixel((i)*size2,(j+0.5)*size2).r;
+                        p=image.pixel((i+0.5)*size2,(j)*size2).r;
+
+                        image.pixel(0,(j)*size2)=glm::vec3{(n+p+q)/3};
+                    }
+
+                    if (j==0)
+                    {
+                        // m=image.pixel((i-0.5)*size2,(j)*size2).r;
+                        q=image.pixel((i)*size2,(j+0.5)*size2).r;
+                        p=image.pixel((i+0.5)*size2,(j)*size2).r;
+
+                        image.pixel((i)*size2,0)=glm::vec3{(m+p+q)/3};
+                    }
+
+                    if (i==(size-1)/size2)
+                    {
+                        n=image.pixel((i)*size2,(j-0.5)*size2).r;
+                        m=image.pixel((i-0.5)*size2,(j)*size2).r;
+                        q=image.pixel((i)*size2,(j+0.5)*size2).r;
+
+                        image.pixel((i)*size2,(j)*size2)=glm::vec3{(n+m+q)/3};
+                    }
+
+                    if (j==(size-1)/size2)
+                    {
+                        n=image.pixel((i)*size2,(j-0.5)*size2).r;
+                        m=image.pixel((i-0.5)*size2,(j)*size2).r;
+                        p=image.pixel((i+0.5)*size2,(j)*size2).r;
+
+                        image.pixel((i)*size2,(j)*size2)=glm::vec3{(n+m+p)/3};
+                    }
+
+                    else
+                    {
+                        // n=image.pixel((i)*size2,(j-0.5)*size2).r;
+                        // m=image.pixel((i-0.5)*size2,(j)*size2).r;
+                        q=image.pixel((i)*size2,(j+0.5)*size2).r;
+                        p=image.pixel((i+0.5)*size2,(j)*size2).r;
+
+                        image.pixel((i)*size2,(j)*size2)=glm::vec3{(m+n+p+q)/4};
+                    }
+                    
+                    
+                    
+
+                    
+                }
+            k=0.5+((1/2)*pow(-1,i));
+            }
+            
+        }
+        
+        
+    }
+
+image.save("output/pouet.png");
+}
+
+
 
 int main()
 { 
