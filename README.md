@@ -841,7 +841,8 @@ image.save("output/mandelbrot.png");
 }
 ```
 **Sympa :** On peut changer les conditions initiales de z=0 pour obtenir d'autres ensembles de Julia non particuliers
-
+![image](/output/mandelbrot.png)
+![image](/output/mandelbrot_malade.png)
 ### Tentative Diamond Square
 
 ```cpp
@@ -962,7 +963,7 @@ void diamond_square(int size)
 image.save("output/ds.png");
 }
 ```
-
+![image](/output/ds.png)
 **Difficulté :** boucler sur les diamants en maitrisant le parcours des secteurs et réaliser les conditions aux bords. Inachevé.
 
 *© 2023 AMGR, Inc. Tous droits réservés*
