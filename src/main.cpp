@@ -123,9 +123,9 @@ void degrade()
     {
         for (int y{0}; y < image.height(); y++)
         {
-            image.pixel(x,y).r = x/(image.width()*1.f);
-            image.pixel(x,y).g = x/(image.width()*1.f);
-            image.pixel(x,y).b = x/(image.width()*1.f);
+            image.pixel(x,y).r = x/static_cast<float>(image.width()); // Pour convertir un int en float, on préférera utiliser static_cast qui est l'instruction dédiée
+            image.pixel(x,y).g = x/static_cast<float>(image.width());
+            image.pixel(x,y).b = x/static_cast<float>(image.width());
         }
     }
 
@@ -191,35 +191,30 @@ void rgb_split()
     std::cout << "Entrez un nombre entre 0 et " << image.width()/2 << " : ";
     std::cin >> number;
     
-    for (int x{0}; x < number; x++)
+    // En mettant la boucle sur y en premier, vous pouvez ne l'écrire qu'une seule fois et ça allège un peu le code :
+    for (int y{0}; y < image.height(); y++)
     {
-        for (int y{0}; y < image.height(); y++)
+        for (int x{0}; x < number; x++)
         {
             newimage.pixel(x,y).r = image.pixel(x+number,y).r;
             newimage.pixel(x,y).g = image.pixel(x,y).g;
             newimage.pixel(x,y).b = image.pixel(x,y).b;
         }
-    }
     
-    for (int x{number}; x < (image.width()-1-number); x++)
-    {
-        for (int y{0}; y < image.height(); y++)
+        for (int x{number}; x < (image.width()-1-number); x++)
         {
             newimage.pixel(x,y).r = image.pixel(x+number,y).r;
             newimage.pixel(x,y).g = image.pixel(x,y).g;
             newimage.pixel(x,y).b = image.pixel(x-number,y).b;
         }
-    }
 
-    for (int x{(image.width()-1-number)}; x < (image.width()-1); x++)
-    {
-        for (int y{0}; y < image.height(); y++)
+        for (int x{(image.width()-1-number)}; x < (image.width()-1); x++)
         {
             newimage.pixel(x,y).r = image.pixel(x,y).r;
             newimage.pixel(x,y).g = image.pixel(x,y).g;
             newimage.pixel(x,y).b = image.pixel(x-number,y).b;
         }
-    }
+    }   
 
     newimage.save("output/rgb_split.png"); 
 }
@@ -234,7 +229,12 @@ void luminosite()
     {
         for (int y{0}; y < image.height(); y++)
         {
-            image.pixel(x,y) = glm::vec3{std::pow(image.pixel(x,y).r, puissance),std::pow(image.pixel(x,y).g, puissance),std::pow(image.pixel(x,y).b, puissance)};
+            // Vous avez le droit de sauter des lignes, et ça peut rendre le code plus lisible
+            image.pixel(x,y) = glm::vec3{
+                std::pow(image.pixel(x,y).r, puissance),
+                std::pow(image.pixel(x,y).g, puissance),
+                std::pow(image.pixel(x,y).b, puissance)
+            };
         }
     }
 
@@ -399,6 +399,8 @@ void rosace()
 
     //         }
     //     }
+
+    // le code aurait été beaucoup plus concis si tu avais fait une fonction qui dessine un cercle plutôt que de dupliquer le code à chaque fois 
 
     for (float teta{0}; teta<(2*3.14); teta+=(2*3.14)/nombre)
     {
@@ -740,22 +742,20 @@ void mosaique_miroir_simple()
     {
         for (int y{0}; y < newimage.height(); y++)
         {
-            if(x/image.width()%2==0 && y/image.height()%2==0)
+            // Tu peux encore + simplifier le code et faire seulement 2 if au lieu de 4 : un pour savoir quel est ton x, et l'autre pour ton y
+            int actual_x{x%image.width()};
+            int actual_y{y%image.height()};
+            if(x/image.width()%2==1)
             {
-                newimage.pixel(x,y) = image.pixel(x%image.width(),y%image.height());
+                // Mirror on x
+                actual_x = image.width()-1-actual_x;
             }
-            if(x/image.width()%2==0 && y/image.height()%2==1)
+            if(y/image.height()%2==1)
             {
-                newimage.pixel(x,y) = image.pixel(x%image.width(),image.height()-1-(y%image.height()));
+               // Mirror on y
+               actual_y = image.height()-1-actual_y;
             }
-            if(x/image.width()%2==1 && y/image.height()%2==0)
-            {
-                newimage.pixel(x,y) = image.pixel(image.width()-1-(x%image.width()),y%image.height());
-            }
-            if(x/image.width()%2==1 && y/image.height()%2==1)
-            {
-                newimage.pixel(x,y) = image.pixel(image.width()-1-(x%image.width()),image.height()-1-(y%image.height()));
-            }
+            newimage.pixel(x,y) = image.pixel(actual_x, actual_y);
         }
     }
 
